@@ -1,30 +1,30 @@
-# Motor SDD (Spec-Driven Development) - v3.0
+# Motor SDD (Spec-Driven Development)
 
-Un motor de compilación basado en Ingeniería de Prompts que transforma especificaciones técnicas redactadas en Markdown (`.md`) en matrices de requerimientos modulares en formato Excel (`.xlsx`), listas para QA y Arquitectura.
+Motor de automatización basado en Ingeniería de Prompts para convertir especificaciones técnicas en Markdown (`.md`) a matrices de requerimientos estandarizadas en Excel (`.xlsx`). 
+
+> **Nota para el equipo de Celestial:** Esta herramienta está optimizada para **VS Code + GitHub Copilot**. Al clonar este repositorio, el archivo de configuración `.github/copilot-instructions.md` se detectará automáticamente, permitiendo ejecutar el compilador sin configuraciones adicionales.
 
 ## ¿Qué resuelve esta herramienta?
-La redacción manual de requerimientos en Excel es propensa a errores, recorta contexto técnico y consume horas de desarrollo. Este motor automatiza el proceso utilizando IA para leer el documento, entender la lógica de negocio, separar los criterios de aceptación y compilar un libro de Excel unificado mediante un script de Python ejecutado en la nube.
+Elimina la creación manual de matrices de requerimientos. Automatiza la extracción semántica de reglas de negocio, prioridades y criterios de aceptación, generando un libro de Excel profesional con formato corporativo, pestañas modulares por componente y ajuste dinámico de celdas.
 
-## Características Principales
-- **100% Agnóstico:** Funciona con cualquier archivo `.md`.
-- **Arquitectura Modular:** Transforma automáticamente los títulos principales (`##`) en pestañas individuales dentro del Excel.
-- **Jerarquía Preservada:** Anida requerimientos bajo sus respectivos módulos (`###`).
-- **Extracción Inteligente:** Aísla prioridades, clasifica los requerimientos (Funcional, No Funcional, Restricción, Hitos) y separa el criterio de aceptación o notas técnicas de forma automática.
-- **Formato Industrial:** El Excel de salida se autogenera con colores corporativos, bordes, ajuste de texto (`wrap_text=True`) y anchos de columna dinámicos.
+## Modos de Uso
 
-## Cómo utilizarlo en el equipo (Vía Claude)
+### Opción A: Modo Nativo (VS Code / Copilot) - **RECOMENDADO**
+Para desarrolladores que buscan automatización total sin salir del editor:
+1. Asegúrate de tener el archivo `.github/copilot-instructions.md` en la raíz de tu proyecto.
+2. Invoque el chat de Copilot (`Ctrl + I` o `Ctrl + Alt + I`).
+3. Escribe el comando: **"Ejecuta el compilador SDD para este archivo"**.
+4. La IA procesará el Markdown y guardará el archivo `.xlsx` automáticamente en la raíz del proyecto.
 
-Dado que en el equipo utilizamos Claude, el flujo de trabajo es inmediato gracias a su capacidad de ejecutar código (Artifacts/Analysis).
+### Opción B: Modo Rápido (Web - Claude)
+Ideal para pruebas rápidas fuera del entorno de desarrollo:
+1. Copia el contenido de `sdd_skill_v3.txt`.
+2. Pégalo en un nuevo chat de Claude y arrastra tu archivo `.md`.
+3. Descarga el Excel resultante desde el *Artifact* generado.
 
-1. Abre un nuevo chat en **Claude**.
-2. Copia todo el contenido del archivo `sdd_skill_v3.txt` incluido en este repositorio y pégalo como tu primer mensaje para inicializar el motor.
-3. Arrastra tu documento `.md` al chat o pega el texto.
-4. Claude analizará semánticamente el documento, escribirá un script de `openpyxl` en su servidor, y te devolverá un **archivo .xlsx único** listo para descargar.
-
-## Estructura recomendada del documento Markdown
-Para que el motor parsee correctamente tu documento, asegúrate de seguir esta estructura básica:
-
-```md
-## Nombre del Módulo (Se convertirá en pestaña)
-### Submódulo o Pantalla (Se irá a la columna 'Componente')
-- El sistema debe hacer X acción → Este es el criterio de validación. Prioridad Alta.
+## Estructura del Markdown
+Para una correcta compilación, utiliza la siguiente jerarquía en tus documentos:
+```markdown
+## Nombre del Módulo (Se convertirá en pestaña de Excel)
+### Submódulo (Columna 'Componente')
+- El sistema debe hacer X → Criterio de validación. Prioridad Alta.
